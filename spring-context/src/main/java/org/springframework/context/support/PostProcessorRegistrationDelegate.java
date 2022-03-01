@@ -368,6 +368,8 @@ final class PostProcessorRegistrationDelegate {
 			return bean;
 		}
 
+		// 如果一个BeanPostProcessor里面注入了Bean 实例化该processor中会执行factory.getBean(bean) getBean过程中会经过BeanPostProcessor
+		// 若getBean途中还有BeanPostProcessor没有注册完成就会打印此日志
 		@Override
 		public Object postProcessAfterInitialization(Object bean, String beanName) {
 			if (!(bean instanceof BeanPostProcessor) && !isInfrastructureBean(beanName) &&

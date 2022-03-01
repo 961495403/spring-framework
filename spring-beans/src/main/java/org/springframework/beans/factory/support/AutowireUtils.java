@@ -97,6 +97,7 @@ abstract class AutowireUtils {
 		// It was declared by CGLIB, but we might still want to autowire it
 		// if it was actually declared by the superclass.
 		Class<?> superclass = wm.getDeclaringClass().getSuperclass();
+		//不是CGLIB代理类生成的方法 是父类的set方法 因此此属性是父类的 可以装载
 		return !ClassUtils.hasMethod(superclass, wm);
 	}
 
