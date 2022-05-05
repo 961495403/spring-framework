@@ -579,8 +579,17 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			if (!mbd.postProcessed) {
 				try {
 					// 此处AutowiredAnnotationBeanPostProcessor::postProcessMergedBeanDefinition
-					// 对@Autowired @Resource标注的类型 对象注册到BeanDefinition
+					// 对@Autowired @Inject标注的类型 对象注册到BeanDefinition
 					// 注册后在populateBean(String beanName, RootBeanDefinition mbd, @Nullable BeanWrapper bw)进行注入
+
+					// PersistenceAnnotationBeanPostProcessor::postProcessMergedBeanDefinition
+					// 对@PersistenceContext @PersistenceUnit标注的类型 对象注册到BeanDefinition
+
+					// InitDestroyAnnotationBeanPostProcessor::postProcessMergedBeanDefinition
+					// 注册@PostConstruct,@PreDestroy(可能可以配置)
+
+					// org.springframework.context.annotation.internalScheduledAnnotationProcessor
+					// 处理@Schedule
 					applyMergedBeanDefinitionPostProcessors(mbd, beanType, beanName);
 				}
 				catch (Throwable ex) {
