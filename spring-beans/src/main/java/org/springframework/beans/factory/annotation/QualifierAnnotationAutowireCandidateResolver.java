@@ -143,6 +143,7 @@ public class QualifierAnnotationAutowireCandidateResolver extends GenericTypeAwa
 	 */
 	@Override
 	public boolean isAutowireCandidate(BeanDefinitionHolder bdHolder, DependencyDescriptor descriptor) {
+		// super会校验泛型
 		boolean match = super.isAutowireCandidate(bdHolder, descriptor);
 		if (match) {
 			match = checkQualifiers(bdHolder, descriptor.getAnnotations());
@@ -358,6 +359,7 @@ public class QualifierAnnotationAutowireCandidateResolver extends GenericTypeAwa
 
 	/**
 	 * Determine a suggested value from any of the given candidate annotations.
+	 * 查找@Value的值（可以更改）
 	 */
 	@Nullable
 	protected Object findValue(Annotation[] annotationsToSearch) {

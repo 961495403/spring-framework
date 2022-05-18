@@ -1321,6 +1321,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
 			Class<?> type = descriptor.getDependencyType();
 			Object value = getAutowireCandidateResolver().getSuggestedValue(descriptor);
+			// 如果value不为空则说明找到了@Value的值（默认是@Value，可以更改）
 			if (value != null) {
 				// 处理属性为String
 				if (value instanceof String) {
@@ -1576,6 +1577,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 		}
 		// isAutowireCandidate会检查泛型
 		for (String candidate : candidateNames) {
+			// 不是自己引用自己 并且 是合适的
 			if (!isSelfReference(beanName, candidate) && isAutowireCandidate(candidate, descriptor)) {
 				addCandidateEntry(result, candidate, descriptor, requiredType);
 			}

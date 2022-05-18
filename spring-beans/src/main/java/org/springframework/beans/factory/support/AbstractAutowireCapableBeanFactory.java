@@ -511,7 +511,6 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		}
 
 		try {
-			//可在此处设置Bean代理 （AOP）
 			// Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
 			Object bean = resolveBeforeInstantiation(beanName, mbdToUse);
 			if (bean != null) {
@@ -621,6 +620,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			// 执行BeanPostProcessor::postProcessBeforeInitialization
 			// 执行InitializingBean::afterPropertiesSet
 			// 执行BeanPostProcessor::postProcessAfterInitialization
+
+			//AOP在此处设置代理 applyBeanPostProcessorsAfterInitialization AbstractAutoProxyCreator::postProcessAfterInitialization
 			exposedObject = initializeBean(beanName, exposedObject, mbd);
 		}
 		catch (Throwable ex) {
